@@ -1,5 +1,5 @@
 const nameInput = document.getElementById("my-name-input");
-const myMessage = document.getElementById("my-message");
+const myMessage = document.getElementById("my-message-input");
 const sendButton = document.getElementById("send-button");
 const chatBox = document.getElementById("chat");
 
@@ -61,3 +61,11 @@ function updateMessages() {
 }
 
 updateMessages();
+
+sendButton.addEventListener("click", function(e) {
+  e.preventDefault();
+  const sender = nameInput.value;
+  const message = myMessage.value;
+  sendMessages(sender, message);
+  myMessage.value = "";
+});
