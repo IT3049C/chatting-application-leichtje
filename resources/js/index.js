@@ -65,6 +65,40 @@ function updateMessages() {
 updateMessages();
 
 
+const serverURL = `https://it3049c-chat.fly.dev/messages`;
+
+async function fetchMessages() {
+  const response = await fetch(serverURL);
+  return response.json();
+}
+
+async function updateMessages() {
+  const messages = await fetchMessages();
+
+  const MILLISECONDS_IN_TEN_SECONDS = 10000;
+  setInterval(updateMessages, MILLISECONDS_IN_TEN_SECONDS);
+}
+
+updateMessages();
+
+function sendMessages(username, text) {
+  const newMessage = {
+    sender: username,
+    text: text,
+    timestamp: new Date()
+  };
+
+  fetch(serverURL, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(newMessage)
+  });
+}
+
+
+
 function sendMessages(sender, text) {
   const timestamp = Date.now();
   const message = {
