@@ -3,6 +3,8 @@ const myMessage = document.getElementById("my-message-input");
 const sendButton = document.getElementById("send-button");
 const chatBox = document.getElementById("chat");
 
+let messages = fetchMessages();
+
 function formatMessage(message, myNameInput) {
   const time = new Date(message.timestamp);
   const formattedTime = `${time.getHours()}:${time.getMinutes()}`;
@@ -61,6 +63,20 @@ function updateMessages() {
 }
 
 updateMessages();
+
+
+function sendMessages(sender, text) {
+  const timestamp = Date.now();
+  const message = {
+    sender,
+    text,
+    timestamp,
+  };
+
+  const formattedMessage = formatMessage(message, sender);
+  chatBox.innerHTML += formattedMessage;
+}
+
 
 sendButton.addEventListener("click", function(e) {
   e.preventDefault();
